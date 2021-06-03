@@ -1,0 +1,24 @@
+@import 'colors';
+
+.button {
+  border-radius: 100px;
+  color: $text-light;
+  background: $text-yellow;
+  filter: drop-shadow(0px 0px 6px $text-yellow);
+  outline: none;
+  border: none;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: filter ease-in-out 200ms;
+  transition: background linear 100ms;
+
+  &:hover {
+    filter: drop-shadow(0px 0px 6px $secondary-mid-lighter-purple);
+    box-shadow: none;
+    background: none;
+    border: 2px solid $secondary-mid-lighter-purple;
+  }
+}

@@ -1,0 +1,46 @@
+@import 'colors';
+
+.container {
+  background-color: $primary-dark;
+  padding: calc(5rem + 2.5rem) 5rem 4rem 5rem;
+  display: flex;
+
+  .section {
+    width: 50%;
+
+    &:first-child {
+      padding-right: 5rem;
+      padding-bottom: 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &:nth-child(2) {
+      padding-left: 5rem;
+      display: flex;
+    }
+  }
+
+  .header {
+    h4 {
+      margin: 0;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+      color: $text-yellow;
+      letter-spacing: 0.15rem;
+      white-space: nowrap;
+    }
+
+    p {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 600;
+    }
+  }
+
+  .content {
+    color: $secondary-light;
+    font-weight: normal;
+  }
+}

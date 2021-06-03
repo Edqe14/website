@@ -1,0 +1,7 @@
+@import 'colors';
+
+.container {
+  background-color: $secondary-dark;
+  padding: calc(5rem + 2rem) 5rem 2.5rem 5rem;
+  display: flex;
+}

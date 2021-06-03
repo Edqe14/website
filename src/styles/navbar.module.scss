@@ -1,0 +1,35 @@
+@import 'colors';
+
+.container {
+  width: 100vw;
+  height: 5rem;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 2rem;
+  justify-content: space-between;
+  z-index: 10;
+  transition: background ease-in-out 0.3s;
+  
+  h1 {
+    color: $secondary-light;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.05rem;
+    margin: 0;
+  }
+  
+  .links {
+    a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: $text-dark;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.2rem;
+      letter-spacing: -0.05rem;
+      cursor: pointer;
+      transition: all ease-in-out 200ms;
+    }
+  }
+}
