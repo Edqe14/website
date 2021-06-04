@@ -2,10 +2,10 @@
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
+  secure: true,
   auth: {
     type: 'OAuth2',
     user: process.env.EMAIL,
-    pass: process.env.PASS,
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     refreshToken: process.env.REFRESH_TOKEN,
@@ -27,6 +27,14 @@ module.exports = (email, name, text) => {
         subject: `Message from ${from}`,
         text: `${from}\n\n${text}`,
         replyTo: from,
+        auth: {
+          type: 'OAuth2',
+          user: process.env.EMAIL,
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          refreshToken: process.env.REFRESH_TOKEN,
+          accessToken: process.env.ACCESS_TOKEN,
+        },
       },
       (e, i) => (e ? reject(e) : resolve(i))
     );

@@ -49,7 +49,6 @@ app.prepare().then(async () => {
 
         return false;
       });
-      console.log(sent);
 
       if (sent) res.status(200).json({ message: 'Success' });
     });
