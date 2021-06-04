@@ -1,0 +1,12 @@
+@import 'colors';
+
+.input {
+  background: $primary-lighter-dark;
+  border: none;
+  outline: none;
+  padding: 0.8rem 1rem;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+  font-size: 1rem;
+  color: $secondary-light;
+}

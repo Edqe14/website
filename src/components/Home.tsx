@@ -35,7 +35,7 @@ export default function Home({ texts }: Props): ReactElement {
 
   return (
     <section className={Style.container} id='home'>
-      <div className={Style.content}>
+      <div className={`${Style.content} parallax`}>
         <h1 ref={greeting as React.RefObject<HTMLHeadingElement>}>Hi There</h1>
         <Scroll className={Style.scroll} />
       </div>

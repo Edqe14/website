@@ -13,9 +13,9 @@ export default async (
 
   const data = await mongoose.model('data').findOne(
     {
-      type: 'about:me',
+      type: 'contact',
     },
-    { _id: 0 }
+    { 'data.targetEmail': 0, _id: 0 }
   );
 
   if (!data) return res.status(404).json({ message: 'Cannot find data' });

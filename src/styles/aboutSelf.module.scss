@@ -1,3 +1,4 @@
+@use 'sections';
 @import 'colors';
 
 .container {
@@ -19,23 +20,6 @@
     &:nth-child(2) {
       padding-left: 5rem;
       display: flex;
-    }
-  }
-
-  .header {
-    h4 {
-      margin: 0;
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 500;
-      color: $text-yellow;
-      letter-spacing: 0.15rem;
-      white-space: nowrap;
-    }
-
-    p {
-      margin: 0;
-      font-size: 3rem;
-      font-weight: 600;
     }
   }
 

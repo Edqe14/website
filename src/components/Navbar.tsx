@@ -13,7 +13,7 @@ const activeStyle = {
   fontSize: '1.5rem',
 };
 
-const backgroundColors = ['none', '#07060F', '#05040A'];
+const backgroundColors = ['none', '#07060F', '#05040A', '#07060F'];
 
 export default function Navbar(): ReactElement {
   const [active, setActive] = useState(0);
@@ -22,14 +22,19 @@ export default function Navbar(): ReactElement {
     const home = document.getElementById('home');
     const aboutSelf = document.getElementById('about');
     const aboutProjects = document.getElementById('projects');
+    const contact = document.getElementById('contact');
 
-    const homeOffset = home.getBoundingClientRect().top + window.scrollY;
-    const aboutSelfOffset =
-      aboutSelf.getBoundingClientRect().top + window.scrollY;
-    const aboutProjectsOffset =
-      aboutProjects.getBoundingClientRect().top + window.scrollY;
+    const homeOffset = home.getBoundingClientRect().top;
+    const aboutSelfOffset = aboutSelf.getBoundingClientRect().top;
+    const aboutProjectsOffset = aboutProjects.getBoundingClientRect().top;
+    const contactOffset = contact.getBoundingClientRect().top;
 
-    const positions = [homeOffset, aboutSelfOffset, aboutProjectsOffset];
+    const positions = [
+      homeOffset,
+      aboutSelfOffset,
+      aboutProjectsOffset,
+      contactOffset,
+    ];
     const navbar = document.getElementById('navbar');
 
     const listener = () => {
@@ -54,12 +59,7 @@ export default function Navbar(): ReactElement {
 
       <div className={Style.links}>
         {links.map((v, i) => (
-          <a
-            href={v[1]}
-            key={i}
-            style={active === i ? activeStyle : {}}
-            onClick={() => setActive(i)}
-          >
+          <a href={v[1]} key={i} style={active === i ? activeStyle : {}}>
             {v[0]}
           </a>
         ))}

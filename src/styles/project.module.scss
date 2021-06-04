@@ -1,0 +1,50 @@
+@import 'colors';
+
+.container {
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  cursor: pointer;
+  justify-content: space-between;
+  border: 6px solid transparent;
+  transition: all ease-in-out 100ms;
+
+  .icons {
+    list-style: none;
+    margin: unset;
+    padding: unset;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .icon {
+      width: 1.5rem;
+    }
+  }
+
+  h3 {
+    align-self: center;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 600;
+  }
+
+  .techs {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: unset;
+    margin: unset;
+    opacity: 0;
+
+    .tech {
+      margin: 0 0.5rem;
+    }
+  }
+
+  &:hover {
+    border: 6px solid $text-light;
+  }
+}

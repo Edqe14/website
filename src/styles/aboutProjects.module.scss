@@ -1,7 +1,22 @@
+@use 'sections';
 @import 'colors';
 
 .container {
   background-color: $secondary-dark;
   padding: calc(5rem + 2rem) 5rem 2.5rem 5rem;
-  display: flex;
+  
+  .list {
+    margin-top: 2rem;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(20rem,1fr));
+    grid-gap: 4rem;
+    padding: 2rem;
+
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }

@@ -13,7 +13,11 @@ export default function Head(): ReactElement {
       <meta name='og:title' content='Welcome!' />
       <meta name='og:url' content='https://edqe.me' />
       <meta name='og:site_name' content='Edqe_' />
-      <meta name='og:description' content='My new and renewed landing page!' />
+      <meta
+        name='og:description'
+        content='My latest website, anyone is welcomed!'
+      />
+      <meta name='og:image' content='/assets/logo.jpg' />
       <meta name='theme-color' content='#07060F' />
 
       <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />

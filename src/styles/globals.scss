@@ -14,7 +14,7 @@ body {
   box-sizing: border-box;
 }
 
-section {
+section, footer {
   position: relative;
   min-height: 100vh;
   color: $text-light;

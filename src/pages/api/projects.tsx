@@ -13,7 +13,7 @@ export default async (
 
   const data = await mongoose.model('data').findOne(
     {
-      type: 'about:me',
+      type: 'about:projects',
     },
     { _id: 0 }
   );

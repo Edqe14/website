@@ -12,7 +12,7 @@ interface Props {
 export default function AboutSelf({ text }: Props): ReactElement {
   return (
     <section className={Style.container} id='about'>
-      <div className={Style.section}>
+      <div className={`${Style.section} scrollEffect`}>
         <div>
           <div className={Style.header}>
             <h4>About —</h4>
@@ -36,7 +36,7 @@ export default function AboutSelf({ text }: Props): ReactElement {
           />
         </div>
       </div>
-      <div className={Style.section}>
+      <div className={`${Style.section} scrollEffect`}>
         <Globe />
       </div>
     </section>
