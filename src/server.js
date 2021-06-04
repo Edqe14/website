@@ -17,6 +17,8 @@ const limiter = rateLimiter({
   max: dev ? 0 : 75,
 });
 
+require('./database/models/Data.js');
+
 app.prepare().then(async () => {
   await mongoose
     .connect(process.env.MONGO_DB, {
@@ -34,12 +36,58 @@ app.prepare().then(async () => {
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
     server.use(cookieParser());
+    server.use(limiter);
     server.use(csrfProtection);
     server.use((req, res, next) => {
       res.cookie('XSRF-TOKEN', req.csrfToken());
       next();
     });
-    server.get('*', limiter, (req, res) => handle(req, res));
+
+    server.get('/api/about', async (req, res) => {
+      const data = await mongoose.model('data').findOne(
+        {
+          type: 'about:me',
+        },
+        { _id: 0 }
+      );
+
+      if (!data) return res.status(404).json({ message: 'Cannot find data' });
+      return res.status(200).json(data.toJSON().data);
+    });
+    server.get('/api/contact', async (req, res) => {
+      const data = await mongoose.model('data').findOne(
+        {
+          type: 'contact',
+        },
+        { 'data.targetEmail': 0, _id: 0 }
+      );
+
+      if (!data) return res.status(404).json({ message: 'Cannot find data' });
+      return res.status(200).json(data.toJSON().data);
+    });
+    server.get('/api/greeting', async (req, res) => {
+      const data = await mongoose.model('data').findOne(
+        {
+          type: 'greeting',
+        },
+        { _id: 0 }
+      );
+
+      if (!data) return res.status(404).json({ message: 'Cannot find data' });
+      return res.status(200).json(data.toJSON().data);
+    });
+    server.get('/api/projects', async (req, res) => {
+      const data = await mongoose.model('data').findOne(
+        {
+          type: 'about:projects',
+        },
+        { _id: 0 }
+      );
+
+      if (!data) return res.status(404).json({ message: 'Cannot find data' });
+      return res.status(200).json(data.toJSON().data);
+    });
+    server.get('*', (req, res) => handle(req, res));
     server.post('/api/form', async (req, res) => {
       const { name, email, message } = req.body;
 
