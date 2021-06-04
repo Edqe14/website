@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   secure: true,
@@ -16,7 +15,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-module.exports = (email, name, text) => {
+export default function sendMail(
+  email: string,
+  name: string,
+  text: string
+): Promise<unknown> {
   const from = name && email ? `${name} <${email}>` : name || email;
 
   return new Promise((resolve, reject) => {
@@ -27,6 +30,7 @@ module.exports = (email, name, text) => {
         subject: `Message from ${from}`,
         text: `${from}\n\n${text}`,
         replyTo: from,
+        // @ts-expect-error Worked when adding this
         auth: {
           type: 'OAuth2',
           user: process.env.EMAIL,
@@ -39,4 +43,4 @@ module.exports = (email, name, text) => {
       (e, i) => (e ? reject(e) : resolve(i))
     );
   });
-};
+}

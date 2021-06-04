@@ -1,5 +1,6 @@
 import Head from '@components/Head';
 import { ReactElement, useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 
 import Navbar from '@/components/Navbar';
 import Home from '@/components/Home';
@@ -24,20 +25,25 @@ export default function Index(): ReactElement {
   const [about, setAbout] = useState('');
   const [projects, setProjects] = useState([]);
   const [contact, setContact] = useState({});
+  const [, setCookie] = useCookies(['XSRF-TOKEN']);
 
   useEffect(() => {
     (async () => {
-      const [fTexts, fAbout, fProjects, fContact] = await Promise.all([
+      const [fTexts, fAbout, fProjects, fContact, token] = await Promise.all([
         fetch(buildURL('/api/greeting')).then((res) => res.json()),
         fetch(buildURL('/api/about')).then((res) => res.text()),
         fetch(buildURL('/api/projects')).then((res) => res.json()),
         fetch(buildURL('/api/contact')).then((res) => res.json()),
+        fetch(buildURL('/api/token')).then((res) => res.json()),
       ]);
 
       setTexts(fTexts);
       setAbout(fAbout);
       setProjects(fProjects);
       setContact(fContact);
+      setCookie('XSRF-TOKEN', token.data, {
+        sameSite: true,
+      });
     })();
   }, []);
 
