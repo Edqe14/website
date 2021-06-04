@@ -1,0 +1,67 @@
+@import 'colors';
+@import 'mediaHelper';
+
+.container {
+  .content {
+    min-height: 100vh;
+    min-width: 100vw;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .scroll {
+      position: absolute;
+      bottom: 1rem;
+    }
+    
+    h1 {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      margin: 0;
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: $secondary-dark;
+      transition: opacity 0.5s;
+      text-align: center;
+    }
+  }
+
+  .bg {
+    width: 100vw;
+    height: 100vh;
+    object-fit: fill;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
+}
+
+@include breakMedia(sm) {
+  .container {
+    .content {
+      h1 {
+        font-size: 2.5rem;
+        padding: 0 2rem;
+      }
+    }
+  }
+}
+
+@include breakMedia(xs) {
+  .container {
+    .content {
+      h1 {
+        font-size: 2rem;
+        padding: 0 2rem;
+      }
+    }
+  }
+}

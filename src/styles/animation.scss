@@ -1,0 +1,13 @@
+@keyframes updown {
+  0% {
+    transform: translateY(-1%);
+  }
+
+  50% {
+    transform: translateY(1%);
+  }
+
+  100% {
+    transform: translateY(-1%);
+  }
+}

@@ -1,0 +1,154 @@
+@import 'colors';
+@import 'mediaHelper';
+
+.container {
+  width: 100vw;
+  height: 5rem;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 2rem;
+  justify-content: space-between;
+  z-index: 10;
+  transition: background ease-in-out 0.3s;
+  
+  h1 {
+    color: $secondary-light;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.05rem;
+    margin: 0;
+  }
+
+  .background {
+    background-color: $secondary-light;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform ease-in-out 500ms;
+    transform: translateX(100%);
+    display: none;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+  
+  .links {
+    display: flex;
+    align-items: center;
+
+    a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: $text-dark;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.2rem;
+      letter-spacing: -0.05rem;
+      cursor: pointer;
+      transition: all ease-in-out 200ms;
+    }
+
+    .highlight {
+      color: $text-yellow;
+      font-size: 1.5rem;
+    }
+  }
+
+  .menu {
+    z-index: 5;
+    width: 2rem;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    cursor: pointer;
+    display: none;
+    
+    .bar {
+      transition: all ease-in-out 200ms;
+      width: 100%;
+      height: 2px;
+      background-color: $secondary-light;
+      border-radius: 1rem;
+
+      &:nth-child(2) {
+        width: 80%;
+      }
+    }
+
+    &.active  {
+      .bar {
+        background: $primary-dark;
+      }
+
+      .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .bar:nth-child(1) {
+        transform-origin: 50% 50%;
+        transform: translateY(11.5px) rotate(45deg);
+      }
+
+      .bar:nth-child(3) {
+        transform-origin: 50% 50%;
+        transform: translateY(-10.5px) rotate(-45deg);
+      }
+    }
+  }
+}
+
+@keyframes disable {
+  0% {
+    display: flex;
+  }
+
+  100% {
+    display: none;
+  }
+}
+
+@include breakMedia(md) {
+  .container {
+    .background {
+      display: block;
+    }
+  
+    .links {
+      z-index: 2;
+      opacity: 0;
+      transition: opacity ease-in-out 200ms;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      
+      &.active {
+        opacity: 1;
+        
+        a {
+          margin-bottom: 1rem;
+          font-size: 1.8rem;
+        }
+
+        .highlight {
+          font-size: 2.3rem;
+        }
+      }
+    }
+
+    .menu {
+      display: flex !important;
+    }
+  }
+};

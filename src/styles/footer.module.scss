@@ -1,0 +1,220 @@
+@use 'sections';
+@import 'colors';
+@import 'input.module.scss';
+@import 'mediaHelper';
+
+.container {
+  background: $primary-dark;
+  padding: calc(5rem + 2rem) 5rem 2.5rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .content {
+    display: flex;
+    .section {
+      width: 50%;
+  
+      &:first-child {
+        padding-right: 5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+  
+      &:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  
+    .fieldTitle {
+      font-family: 'Roboto Mono', monospace;
+      color: $text-dark;
+      font-weight: 500;
+      margin: unset;
+      padding: unset;
+    }
+  
+    .emailColumn {
+      margin-top: 2rem;
+  
+      p {
+        margin: unset;
+        padding: unset;
+        font-size: 2rem;
+        font-weight: 600;
+        transition: color ease-in-out 200ms;
+        cursor: pointer;
+  
+        &:hover {
+          color: $secondary-light;
+        }
+      }
+    }
+  
+    .socialMedias {
+      margin-top: 2rem;
+  
+      ul {
+        margin: unset;
+        padding: unset;
+        display: flex;
+        list-style: none;
+        align-items: center;
+        margin-top: 0.5rem;
+  
+        .socialMedia {
+          width: 2rem;
+          margin-right: 1rem;
+          cursor: pointer;
+          transition: color ease-in-out 200ms;
+  
+          &:hover {
+            color: $secondary-light;
+          }
+        }
+      }
+    }
+  
+    .form {
+      display: flex;
+  
+      .inputs {
+        display: flex;
+        flex-direction: column;
+        margin-right: 1rem;
+        min-width: 80%;
+  
+        .head {
+          display: flex;
+          margin-bottom: 1rem;
+          
+          & input:first-child {
+            margin-right: 1rem;
+          }
+  
+          input {
+            width: 100%;
+          }
+        }
+  
+        .message {
+          min-height: 9.5rem;
+          resize: none;
+          @extend .input;
+        }
+      }
+  
+      .send {
+        @extend .input;
+        background: none;
+        border: 5px solid $primary-lighter-dark;
+        padding: 0 1rem;
+        width: 100%;
+        transition: all ease-in-out 500ms;
+        cursor: pointer;
+  
+        &:hover {
+          border-color: $secondary-lighter-dark;
+        }
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .copyright {
+      font-weight: 300;
+      color: $text-dark;
+      justify-self: flex-end;
+    }
+
+    .goUpWrapper {
+      align-self: flex-end;
+      border-radius: 100px;
+      background: $primary-dark-purple !important;
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 5px 5px $secondary-dark);
+      cursor: pointer;
+  
+      &:hover {
+        .goUp {
+          transform: translateY(-5px);
+        }
+      }
+  
+      .goUp {
+        height: auto;
+        width: 1.8rem;
+        color: $text-light;
+        transition: all ease-in-out 200ms;
+      }
+    }
+  }
+}
+
+@include breakMedia (md) {
+  .container {
+    .content {
+      .section {
+        .head {
+          flex-direction: column;
+
+          input:first-child {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include breakMedia (sm) {
+  .container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    .content {
+      flex-direction: column;
+      margin-bottom: 3rem;
+
+      .section {
+        width: 100%;
+        padding: unset !important;
+      }
+
+      .section:nth-child(2) {
+        margin-top: 2.5rem;
+      }
+    }
+  }
+}
+
+@include breakMedia (xs) {
+  .container {
+    .content {
+      .section:nth-child(2) {
+        form {
+          flex-direction: column;
+
+          .inputs {
+            margin-right: unset !important;
+            margin-bottom: 1rem;
+          }
+
+          .send {
+            padding: 2rem 1rem;
+          }
+        }
+      }
+    }
+  }
+}

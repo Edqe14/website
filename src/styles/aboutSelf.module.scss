@@ -1,0 +1,64 @@
+@use 'sections';
+@import 'colors';
+@import 'mediaHelper';
+
+.container {
+  background-color: $primary-dark;
+  padding: calc(5rem + 2.5rem) 5rem 4rem 5rem;
+  display: flex;
+
+  .section {
+    width: 50%;
+
+    &:first-child {
+      padding-right: 5rem;
+      padding-bottom: 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &:nth-child(2) {
+      padding-left: 5rem;
+      display: flex;
+    }
+  }
+
+  .content {
+    color: $secondary-light;
+    font-weight: normal;
+  }
+}
+
+@include breakMedia(sm) {
+  .container {
+    flex-direction: column;
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    .section {
+      width: 100%;
+
+      &:first-child {
+        padding-right: unset;
+        padding-bottom: unset;
+      
+        div:nth-child(2) {
+          margin-top: 1rem;
+        }
+      }
+
+      &:nth-child(2) {
+        padding-left: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 100%;
+          max-width: 30rem;
+        }
+      }
+    }
+  }
+}
