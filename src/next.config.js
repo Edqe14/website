@@ -3,6 +3,7 @@ const { version } = require('./package.json');
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 module.exports = {
   exportTrailingSlash: true,
+  useFileSystemPublicRoutes: false,
   webpack(config, options) {
     const { webpack } = options;
 
