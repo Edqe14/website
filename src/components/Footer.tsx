@@ -28,40 +28,51 @@ export default function Footer({
   socialMedias,
 }: Contact): ReactElement {
   const [status, setStatus] = useState(0);
+  let lock = false;
 
   const sendForm = async () => {
+    if (lock) return;
+
+    lock = true;
     setStatus(1);
-    const name = document.getElementById('name') as HTMLInputElement;
-    const email = document.getElementById('email') as HTMLInputElement;
-    const message = document.getElementById('message') as HTMLInputElement;
-    const token = document.cookie
-      .split('; ')
-      .map((t) => t.split('='))
-      .find((t) => t[0] === 'XSRF-TOKEN')[1];
 
-    const res = await fetch(buildURL('/api/form'), {
-      credentials: 'same-origin',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'csrf-token': token,
-      },
-      body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        message: message.value,
-        _csrf: token,
-      }),
-    });
+    try {
+      const name = document.getElementById('name') as HTMLInputElement;
+      const email = document.getElementById('email') as HTMLInputElement;
+      const message = document.getElementById('message') as HTMLInputElement;
+      const token = document.cookie
+        .split('; ')
+        .map((t) => t.split('='))
+        .find((t) => t[0] === 'XSRF-TOKEN')[1];
 
-    if (res.status !== 200) {
+      const res = await fetch(buildURL('/api/form'), {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'csrf-token': token,
+        },
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          message: message.value,
+          _csrf: token,
+        }),
+      });
+
+      if (res.status !== 200) {
+        setStatus(3);
+        res.json().then(console.error);
+      } else setStatus(2);
+
+      setTimeout(() => setStatus(0), 5000);
+      [name, email, message].forEach((e) => (e.value = ''));
+      lock = false;
+    } catch (e) {
+      console.error(e);
       setStatus(3);
-      res.json().then(console.error);
-    } else setStatus(2);
-
-    setTimeout(() => setStatus(0), 5000);
-    [name, email, message].forEach((e) => (e.value = ''));
+    }
   };
 
   return (
@@ -163,7 +174,10 @@ export default function Footer({
 
               <button
                 className={Style.send}
-                style={{ background: statusColors[status] }}
+                style={{
+                  background: statusColors[status],
+                  cursor: status === 1 ? 'progress' : 'pointer',
+                }}
               >
                 Send
               </button>
