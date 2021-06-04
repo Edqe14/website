@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { IncomingMessage } from 'http';
 import { NextApiResponse } from 'next';
 import { DataInterface } from '@database/Types';
+import Connect from '@/database/DB';
 
 export default async (
   req: IncomingMessage,
@@ -10,6 +11,7 @@ export default async (
   if (req.method !== 'GET')
     return res.status(405).json({ message: 'Only accepting "GET" requests' });
 
+  await Connect();
   const data = await mongoose.model('data').findOne(
     {
       type: 'greeting',

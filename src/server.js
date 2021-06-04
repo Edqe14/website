@@ -4,7 +4,6 @@ const next = require('next');
 const rateLimiter = require('express-rate-limit');
 const csrf = require('csurf');
 const cookieParser = require('cookie-parser');
-const mongoose = require('mongoose');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -20,15 +19,6 @@ const limiter = rateLimiter({
 require('./database/models/Data.js');
 
 app.prepare().then(async () => {
-  await mongoose
-    .connect(process.env.MONGO_DB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    })
-    .then(() => console.log('Database connected'));
-
   const port = process.env.PORT || 3000;
   const server = express();
 
