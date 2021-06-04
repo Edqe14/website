@@ -2,6 +2,7 @@
 const { version } = require('./package.json');
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 module.exports = {
+  trailingSlash: true,
   webpack(config, options) {
     const { webpack } = options;
 
