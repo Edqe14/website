@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@types/csurf": "^1.11.1",
+    "@types/express-rate-limit": "^5.1.1",
     "@types/node": "^15.0.1",
     "@types/nodemailer": "^6.4.2",
     "@types/react": "^17.0.9",
