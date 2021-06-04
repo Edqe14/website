@@ -1,5 +1,6 @@
 @use 'sections';
 @import 'colors';
+@import 'mediaHelper';
 
 .container {
   background-color: $secondary-dark;
@@ -7,16 +8,59 @@
   
   .list {
     margin-top: 2rem;
-    display: grid;
+    display: flex;
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(20rem,1fr));
-    grid-gap: 4rem;
     padding: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 
-    .center {
+    div {
+      margin: 0 2rem 2rem 0;
+    }
+  }
+}
+
+@include breakMedia(md) {
+  .container {
+    .list {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-wrap: wrap;
+
+      div {
+        width: 15rem;
+        height: 15rem;
+      }
+    }
+  }
+}
+
+@include breakMedia(sm) {
+  .container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    .list {
+      padding-left: unset;
+      padding-right: unset;
+
+      div {
+        width: 12rem;
+        height: 12rem;
+      }
+    }
+  }
+}
+
+@include breakMedia(xs) {
+  .container {
+    .list {
+      div {
+        width: 60vw;
+        height: 60vw;
+        margin-right: unset;
+        aspect-ratio: 1 1;
+      }
     }
   }
 }

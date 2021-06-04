@@ -10,6 +10,8 @@ import useWindowSize from '@/hooks/useWindowSize';
 import { Contact } from '@/database/Types';
 import buildURL from '@/hooks/buildURL';
 
+const clamp = (num: number, min: number, max: number) =>
+  Math.min(Math.max(num, min), max);
 const data = {
   ease: 0.1,
   current: 0,
@@ -55,7 +57,7 @@ export default function Index(): ReactElement {
     const difference = data.current - data.rounded;
     const acceleration = difference / useWindowSize().width;
     const velocity = +acceleration;
-    const skew = velocity * 7.5;
+    const skew = clamp(velocity * 7.5, -10, 10);
 
     //Assign skew and smooth scrolling to the scroll container
     const parallax = document.querySelectorAll('.parallax');

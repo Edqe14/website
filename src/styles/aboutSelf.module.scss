@@ -1,5 +1,6 @@
 @use 'sections';
 @import 'colors';
+@import 'mediaHelper';
 
 .container {
   background-color: $primary-dark;
@@ -26,5 +27,38 @@
   .content {
     color: $secondary-light;
     font-weight: normal;
+  }
+}
+
+@include breakMedia(sm) {
+  .container {
+    flex-direction: column;
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    .section {
+      width: 100%;
+
+      &:first-child {
+        padding-right: unset;
+        padding-bottom: unset;
+      
+        div:nth-child(2) {
+          margin-top: 1rem;
+        }
+      }
+
+      &:nth-child(2) {
+        padding-left: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 100%;
+          max-width: 30rem;
+        }
+      }
+    }
   }
 }

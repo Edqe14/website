@@ -1,6 +1,14 @@
 @import 'colors';
 @import 'animation';
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
 html,
 body {
   padding: 0;
