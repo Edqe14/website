@@ -16,14 +16,17 @@ export default function Home({ texts }: Props): ReactElement {
   const greeting = createRef();
   const changeText = async () => {
     if (!greeting.current) return;
+    index++;
+    if (index > texts.length - 1) index = 0;
+    if (texts[index] === undefined || texts[index] === null)
+      return setTimeout(changeText, 3000);
+
     const h1 = greeting.current as HTMLHeadingElement;
     h1.style.opacity = '0';
 
     await sleep();
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    index++;
-    if (index > texts.length - 1) index = 0;
 
     h1.innerHTML = texts[index];
     h1.style.opacity = '1';
