@@ -18,11 +18,8 @@ export default function Home({ texts }: Props): ReactElement {
     if (!greeting.current) return;
     index++;
     if (index > texts.length - 1) index = 0;
-
-    if (texts[index] === undefined || texts[index] === null) {
-      index--;
+    if (texts[index] === undefined || texts[index] === null)
       return setTimeout(changeText, 3000);
-    }
 
     const h1 = greeting.current as HTMLHeadingElement;
     h1.style.opacity = '0';
