@@ -1,0 +1,53 @@
+@import 'colors';
+@import 'animation';
+
+.container {
+  z-index: 15;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: $primary-blueish-light;
+  transform: translateY(-100vh);
+  transition: transform ease-in-out 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.active {
+    transform: unset;
+  }
+
+  .text {
+    font-size: 2rem;
+    letter-spacing: 1rem;
+    z-index: 3;
+  }
+
+  .circle {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    background: $primary-blueish-light;
+    border-radius: 50%;
+    transform: translateX(-6rem);
+    animation: sideways 3s ease-in-out infinite;
+
+    &:nth-child(2) {
+      width: 2rem;
+      height: 2rem;
+      animation-delay: 200ms;
+      background: $text-yellow;
+    }
+
+    &:nth-child(3) {
+      width: 1.5rem;
+      height: 1.5rem;
+      animation-delay: 300ms;
+      border: 2px solid $primary-mid-purple;
+      z-index: -1;
+      opacity: 50%;
+    }
+  }
+}

@@ -11,11 +11,12 @@ const limiter = rateLimiter({
   windowMs: 15 * 60 * 1000,
   max: dev ? 0 : 75,
 });
+const cookie = cookieParser();
 
 export const allMiddlewares = {
   csrf: csrfProtection,
   rateLimiter: limiter,
-  cookieParser,
+  cookie,
 };
 
 export default function Middlewares(
@@ -26,7 +27,7 @@ export default function Middlewares(
     bodyParser.json()(req, res, (e) => {
       if (e) return resolve(false);
 
-      cookieParser()(req, res, (e: unknown) => {
+      cookie(req, res, (e: unknown) => {
         if (e) return resolve(false);
 
         limiter(req as Request, res as Response, (e: unknown) => {

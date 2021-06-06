@@ -11,3 +11,9 @@
     transform: translateY(-1%);
   }
 }
+
+@keyframes sideways {
+  50% {
+    transform: translateX(6rem);
+  }
+}
