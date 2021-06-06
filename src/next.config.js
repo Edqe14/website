@@ -3,6 +3,10 @@ const { version } = require('./package.json');
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 module.exports = {
   trailingSlash: true,
+  i18n: {
+    locales: ['en-US'],
+    defaultLocale: 'en-US',
+  },
   webpack(config, options) {
     const { webpack } = options;
 
