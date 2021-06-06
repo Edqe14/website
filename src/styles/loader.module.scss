@@ -1,5 +1,6 @@
 @import 'colors';
 @import 'animation';
+@import 'mediaHelper';
 
 .container {
   z-index: 15;
@@ -23,6 +24,8 @@
     font-size: 2rem;
     letter-spacing: 1rem;
     z-index: 3;
+    text-align: center;
+    transform: translateX(0.5rem);
   }
 
   .circle {
@@ -48,6 +51,15 @@
       border: 2px solid $primary-mid-purple;
       z-index: -1;
       opacity: 50%;
+    }
+  }
+}
+
+@include breakMedia(xs) {
+  .container {
+    .text {
+      font-size: 1.5rem;
+      transform: translateX(0.75rem);
     }
   }
 }
