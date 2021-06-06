@@ -12,6 +12,7 @@ export default function Head(): ReactElement {
       <meta name='subject' content='Edqe_ Landing Page' />
       <meta name='og:title' content='Welcome!' />
       <meta name='og:url' content='https://edqe.me' />
+      <meta name='description' content='This is Edqe_ personal website' />
       <meta name='og:site_name' content='Edqe_' />
       <meta
         name='og:description'
