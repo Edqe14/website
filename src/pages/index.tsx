@@ -1,15 +1,16 @@
 import Head from '@components/Head';
 import { ReactElement, useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import useWindowSize from '@/utils/windowSize';
+import { Contact } from '@/database/Types';
+import buildURL from '@/utils/buildURL';
 
 import Navbar from '@/components/Navbar';
 import Home from '@/components/Home';
 import AboutSelf from '@/components/AboutSelf';
 import AboutProjects from '@/components/AboutProjects';
 import Footer from '@/components/Footer';
-import useWindowSize from '@/hooks/useWindowSize';
-import { Contact } from '@/database/Types';
-import buildURL from '@/hooks/buildURL';
+import Loader from '@/components/Loader';
 
 const clamp = (num: number, min: number, max: number) =>
   Math.min(Math.max(num, min), max);
@@ -25,17 +26,22 @@ export default function Index(): ReactElement {
   const [about, setAbout] = useState('');
   const [projects, setProjects] = useState([]);
   const [contact, setContact] = useState({});
+  const [loaded, setLoaded] = useState(false);
   const [, setCookie] = useCookies(['XSRF-TOKEN']);
 
   useEffect(() => {
     (async () => {
-      const [fTexts, fAbout, fProjects, fContact, token] = await Promise.all([
-        fetch(buildURL('/api/greeting')).then((res) => res.json()),
-        fetch(buildURL('/api/about')).then((res) => res.text()),
-        fetch(buildURL('/api/projects')).then((res) => res.json()),
-        fetch(buildURL('/api/contact')).then((res) => res.json()),
+      const [fAll, token] = await Promise.all([
+        fetch(buildURL('/api/all')).then((res) => res.json()),
         fetch(buildURL('/api/token')).then((res) => res.json()),
       ]);
+
+      const {
+        greeting: fTexts,
+        about: fAbout,
+        projects: fProjects,
+        contact: fContact,
+      } = fAll;
 
       setTexts(fTexts);
       setAbout(fAbout);
@@ -43,12 +49,16 @@ export default function Index(): ReactElement {
       setContact(fContact);
       setCookie('XSRF-TOKEN', token.data, {
         sameSite: true,
+        httpOnly: true,
       });
+      setLoaded(true);
     })();
   }, []);
 
   useEffect(() => {
     requestAnimationFrame(() => skewScrolling());
+
+    setTimeout(() => window.scrollTo(0, 0), 50);
   }, []);
 
   const skewScrolling = () => {
@@ -77,13 +87,14 @@ export default function Index(): ReactElement {
       (e: HTMLElement) => (e.style.transform = `skewY(${skew}deg)`)
     );
 
-    //loop vai raf
     requestAnimationFrame(() => skewScrolling());
   };
 
   return (
     <>
       <Head />
+
+      <Loader loaded={loaded} />
 
       <Navbar />
       <Home texts={texts} />

@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Contact } from '@/database/Types';
-import buildURL from '@/hooks/buildURL';
+import buildURL from '@/utils/buildURL';
 
 import Style from '@styles/footer.module.scss';
 import Input from './Input';
