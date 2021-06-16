@@ -1,9 +1,9 @@
 import Head from '@components/Head';
 import { ReactElement, useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import useWindowSize from '@/utils/windowSize';
 import { Contact } from '@/database/Types';
 import buildURL from '@/utils/buildURL';
+import TagManager from 'react-gtm-module';
 
 import Navbar from '@/components/Navbar';
 import Home from '@/components/Home';
@@ -27,13 +27,11 @@ export default function Index(): ReactElement {
   const [projects, setProjects] = useState([]);
   const [contact, setContact] = useState({});
   const [loaded, setLoaded] = useState(false);
-  const [, setCookie] = useCookies(['XSRF-TOKEN']);
 
   useEffect(() => {
     (async () => {
-      const [fAll, token] = await Promise.all([
+      const [fAll] = await Promise.all([
         fetch(buildURL('/api/all')).then((res) => res.json()),
-        fetch(buildURL('/api/token')).then((res) => res.json()),
       ]);
 
       const {
@@ -47,11 +45,11 @@ export default function Index(): ReactElement {
       setAbout(fAbout);
       setProjects(fProjects);
       setContact(fContact);
-      setCookie('XSRF-TOKEN', token.data, {
-        sameSite: true,
-        httpOnly: true,
-      });
       setLoaded(true);
+
+      TagManager.initialize({
+        gtmId: 'G-XDK2KFBKKW',
+      });
     })();
   }, []);
 
