@@ -40,10 +40,6 @@ export default function Footer({
       const name = document.getElementById('name') as HTMLInputElement;
       const email = document.getElementById('email') as HTMLInputElement;
       const message = document.getElementById('message') as HTMLInputElement;
-      const token = document.cookie
-        .split('; ')
-        .map((t) => t.split('='))
-        .find((t) => t[0] === 'XSRF-TOKEN')[1];
 
       const res = await fetch(buildURL('/api/form'), {
         credentials: 'same-origin',
@@ -51,13 +47,11 @@ export default function Footer({
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          'csrf-token': token,
         },
         body: JSON.stringify({
           name: name.value,
           email: email.value,
           message: message.value,
-          _csrf: token,
         }),
       });
 
