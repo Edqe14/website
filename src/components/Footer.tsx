@@ -118,7 +118,7 @@ export default function Footer({
           </div>
         </div>
 
-        <div className={`${Style.section} scrollEffect`}>
+        {/* <div className={`${Style.section} scrollEffect`}>
           <div>
             <div className={Style.header}>
               <h4 style={{ color: 'transparent' }}>—</h4>
@@ -177,12 +177,12 @@ export default function Footer({
               </button>
             </form>
           </div>
-        </div>
-      </div>
+        </div> */}
+      </div> 
 
       <div className={Style.footer}>
         <p className={Style.copyright}>
-          &copy; 2021 Joshua Tanri. All rights reserved.
+          &copy; {new Date().getFullYear()} Joshua T. All rights reserved.
         </p>
 
         <div
