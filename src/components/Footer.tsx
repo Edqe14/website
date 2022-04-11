@@ -177,8 +177,8 @@ export default function Footer({
               </button>
             </form>
           </div>
-        </div>
-      </div> */}
+        </div> */}
+      </div> 
 
       <div className={Style.footer}>
         <p className={Style.copyright}>
