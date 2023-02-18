@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: initial;
+}
+
+body {
+  @apply bg-primary-dark text-white overflow-x-hidden selection:bg-white selection:text-zinc-800;
+}
+
+.mf-cursor.-menu::before {
+  @apply scale-[1.5];
+}
