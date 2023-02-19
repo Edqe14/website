@@ -2,12 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer utilities {
+  .custom-scrollbar {
+    @apply scrollbar-thin scrollbar-track-light-gold scrollbar-thumb-pale-purple hover:scrollbar-thumb-light-purple overflow-x-hidden;
+  }
+}
+
 html {
   scroll-behavior: initial;
 }
 
 body {
-  @apply bg-primary-dark text-white overflow-x-hidden selection:bg-white selection:text-zinc-800;
+  @apply bg-primary-dark text-zinc-100 selection:bg-white selection:text-zinc-800 overflow-x-hidden;
+}
+
+.mf-cursor:not(.-text):not(.-menu),
+.mf-cursor.-opaque {
+  @apply mix-blend-exclusion;
 }
 
 .mf-cursor.-menu::before {

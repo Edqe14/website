@@ -12,10 +12,13 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { raf } from '@studio-freight/tempus';
 import MouseFollower from 'mouse-follower';
 
-import { Magnetic } from '@/lib/magnetic';
-import Menu from '@/components/Menu';
+import Burger from '@/components/Burger';
 import useStore from '@/hooks/useStore';
 import useCursor from '@/hooks/useCursor';
+import dynamic from 'next/dynamic';
+import { isMobile } from 'react-device-detect';
+
+const Menu = dynamic(() => import('@/components/Menu'), { ssr: false });
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,7 +35,8 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.ticker.remove(gsap.updateRoot);
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { showMenu, setShowMenu } = useStore();
+  const { showMenu, setShowMenu, lockScroll } = useStore();
+  const lenisInstance = useLenis(({ instance }) => instance);
 
   useEffect(() => {
     const unsub = raf.add((time: number) => {
@@ -46,6 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const lenis = new Lenis();
 
+    window.history.scrollRestoration = 'manual';
     ScrollTrigger.refresh();
     useLenis.setState({ instance: lenis });
 
@@ -58,30 +63,45 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
 
+  useEffect(() => {
+    if (lenisInstance) {
+      if (lockScroll) {
+        lenisInstance.stop();
+        document.body.style.setProperty('overflow-y', 'hidden');
+        return;
+      }
+
+      lenisInstance.start();
+      document.body.style.setProperty('overflow-y', 'auto');
+    }
+  }, [lenisInstance, lockScroll]);
+
   // Mouse Follower
   useEffect(() => {
+    if (isMobile) return;
+
     const cursor = new MouseFollower({
       stateDetection: {
-        '-menu': '.menu',
-        '-pointer': 'a,button',
+        '-menu': '.burger,.menu-items',
+        '-pointer': 'button',
       },
       textClassName: 'mf-cursor-text text-zinc-800',
     });
 
-    const magnet = new Magnetic(
-      document.querySelector('.menu') as HTMLElement,
-      {
-        x: 0.08,
-        y: 0.08,
-        s: 0.2,
-        rs: 0.7,
-      },
+    const magnet = import('@/lib/magnetic').then(
+      (module) =>
+        new module.Magnetic(document.querySelector('.burger') as HTMLElement, {
+          x: 0.08,
+          y: 0.08,
+          s: 0.2,
+          rs: 0.7,
+        }),
     );
 
     useCursor.setState({ instance: cursor });
 
     return () => {
-      magnet.unbind();
+      magnet.then((v) => v.unbind());
       cursor.destroy();
       useCursor.setState({ instance: null });
     };
@@ -91,9 +111,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <section
-      className={cn(inter.variable, playfair.variable, 'font-inter relative')}
+      className={cn(
+        inter.variable,
+        playfair.variable,
+        'font-inter relative overflow-hidden',
+      )}
     >
-      <Menu
+      <Menu />
+
+      <Burger
         opened={showMenu}
         onClick={setShowMenu}
         className="fixed right-12 top-12"

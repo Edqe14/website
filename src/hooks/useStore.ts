@@ -5,10 +5,12 @@ const useStore = create(
   combine(
     {
       showMenu: false,
+      lockScroll: false,
     },
     (set) => ({
       setShowMenu: (showMenu: boolean) => set({ showMenu }),
       toggleShowMenu: () => set((state) => ({ showMenu: !state.showMenu })),
+      setLockScroll: (lockScroll: boolean) => set({ lockScroll }),
     }),
   ),
 );
