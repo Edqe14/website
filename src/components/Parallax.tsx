@@ -1,17 +1,8 @@
+import mapRange from '@/lib/mapRange';
 import { gsap } from 'gsap';
 import { useLayoutEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useWindowSize } from 'react-use';
-
-function mapRange(
-  inMin: number,
-  inMax: number,
-  input: number,
-  outMin: number,
-  outMax: number,
-) {
-  return ((input - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
-}
 
 interface Props {
   className?: string;

@@ -1,15 +1,19 @@
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import Image from 'next/image';
-
-import Ricefield from '@/assets/ricefield.jpg';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import createGlobe from 'cobe';
+import mapRange from '@/lib/mapRange';
 import PageMarker from '../PageMarker';
+import { Emoji } from '../Twemoji';
 
 export default function About() {
   const targetRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLHeadingElement>(null);
   const roleRef = useRef<HTMLDivElement>(null);
   const fromRef = useRef<HTMLHeadingElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const phi = useRef(1.2);
 
   useEffect(() => {
     if (
@@ -23,23 +27,22 @@ export default function About() {
     const tl = gsap
       .timeline({
         scrollTrigger: {
-          id: 'about-root',
-          trigger: targetRef.current,
-          pin: true,
-          start: 'top top',
-          end: 'bottom top',
+          id: 'about-container',
+          trigger: '#about',
           scrub: true,
+          start: 'top bottom',
+          end: 'bottom top',
         },
       })
       .to(roleRef.current, {
         id: 'role',
-        scale: 1,
+        y: 0,
         ease: 'power2',
         scrollTrigger: {
           trigger: targetRef.current,
           scrub: true,
-          start: 'top top',
-          end: '+=100%',
+          start: '-800 top',
+          end: '+=60%',
         },
       })
       .to(introRef.current, {
@@ -49,33 +52,20 @@ export default function About() {
         scrollTrigger: {
           trigger: targetRef.current,
           scrub: true,
-          start: '20% top',
-          end: '+=100%',
+          start: '-750 top',
+          end: '+=60%',
         },
       })
       .to(fromRef.current, {
         id: 'from',
-        y: 0,
+        // y: 0,
+        x: 0,
         ease: 'power2',
         scrollTrigger: {
           trigger: targetRef.current,
           scrub: true,
-          start: '20% top',
-          end: '+=100%',
-        },
-      })
-      .to('#about-image-1', {
-        id: 'image-1',
-        rotate: -6,
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        ease: 'power2',
-        scrollTrigger: {
-          trigger: targetRef.current,
-          scrub: true,
-          start: '25% top',
-          end: 'bottom top',
+          start: '-750 top',
+          end: '+=50%',
         },
       });
 
@@ -84,34 +74,85 @@ export default function About() {
     };
   }, [roleRef, targetRef, introRef, fromRef]);
 
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const instance = ScrollTrigger.getById('about-container');
+
+    const updatePhi = () => {
+      if (!instance) return;
+
+      const { progress } = instance;
+
+      phi.current = mapRange(0, 1, progress, 1.2, 3.8);
+    };
+
+    const applyClass = () => {
+      if (!canvasRef.current) return;
+
+      canvasRef.current.style.webkitMaskImage =
+        '-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));';
+      canvasRef.current.style.maskImage =
+        'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))';
+    };
+
+    const globe = createGlobe(canvasRef.current, {
+      devicePixelRatio: 1.5,
+      width: 384 * 1.5,
+      height: 384 * 1.5,
+      phi: 0,
+      theta: 0,
+      dark: 1,
+      diffuse: 1.2,
+      mapSamples: 16000,
+      mapBrightness: 6,
+      baseColor: [0.3, 0.3, 0.3],
+      markerColor: [255 / 255, 61 / 255, 50 / 255],
+      glowColor: [1, 1, 1],
+      opacity: 0.7,
+      markers: [
+        // longitude latitude
+        { location: [-0.035309, 109.296531], size: 0.05 },
+      ],
+      onRender: (state) => {
+        updatePhi();
+
+        // eslint-disable-next-line no-param-reassign
+        state.phi = phi.current;
+      },
+    });
+
+    return () => {
+      globe.destroy();
+      applyClass();
+    };
+  }, []);
+
   return (
     <section
       id="about"
-      className="relative p-12 w-screen min-h-screen flex flex-col"
+      className="relative p-12 w-screen min-h-[80vh] flex flex-col"
     >
-      <section className="relative h-full w-full flex-grow flex flex-col items-center justify-center">
-        <section className="h-[200vh] w-full">
-          <section
-            ref={targetRef}
-            className="h-screen flex items-center justify-center"
-          >
-            <section className="w-min gap-4 flex flex-col justify-center">
-              <section className="overflow-hidden ml-28">
+      <section className="relative flex-grow flex flex-col items-center pt-36">
+        <section id="about-scroll-container" className="w-full">
+          <section ref={targetRef} className="flex items-center justify-center">
+            <section className="w-min gap-4 flex flex-col justify-center -mt-16">
+              <section className="overflow-hidden ml-12 sm:ml-28">
                 <h2
                   ref={introRef}
-                  className="text-3xl sm:text-4xl xl:text-5xl font-medium tracking-tighter leading-[0.8]"
+                  className="text-3xl md:text-4xl xl:text-5xl font-medium tracking-tighter leading-[0.8]"
                   style={{ transform: 'translateY(100%)' }}
                 >
                   I&apos;M A
                 </h2>
               </section>
 
-              <section
-                ref={roleRef}
-                className=""
-                style={{ transform: 'scaleX(3) scaleY(2)' }}
-              >
-                <h2 className="whitespace-nowrap text-6xl sm:text-8xl xl:text-[7.5rem] font-medium tracking-tighter leading-[0.8]">
+              <section className="overflow-hidden">
+                <h2
+                  style={{ transform: 'translateY(100%)' }}
+                  ref={roleRef}
+                  className="whitespace-nowrap text-[42px] md:text-8xl xl:text-[7.5rem] font-semibold tracking-tighter leading-[0.8]"
+                >
                   WEB DEVELOPER
                 </h2>
               </section>
@@ -119,35 +160,25 @@ export default function About() {
               <section className="overflow-hidden self-end">
                 <h2
                   ref={fromRef}
-                  className="text-4xl sm:text-5xl xl:text-6xl font-medium tracking-tighter leading-[0.8]"
-                  style={{ transform: 'translateY(-100%)' }}
+                  className="text-3xl md:text-5xl xl:text-6xl font-medium tracking-tighter flex items-center leading-[0.8] pr-[2px]"
+                  style={{ transform: 'translateX(100%)' }}
                 >
+                  <Emoji code="1f1ee-1f1e9" />
                   FROM INDONESIA
                 </h2>
               </section>
             </section>
 
-            <section
-              id="about-image-1"
-              className="absolute z-[-1] left-40"
+            <canvas
+              ref={canvasRef}
+              className="w-[384px] h-[384px] scale-[1.3] md:scale-[1.8] aspect-square absolute bottom-28 lg:bottom-40 left-1/2 -translate-x-1/2 z-[-1] opacity-70"
               style={{
-                transform: 'rotate(-2deg) translateY(50px) scale(0.75)',
-                opacity: 0,
+                maskImage:
+                  'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
+                WebkitMaskImage:
+                  '-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))',
               }}
-            >
-              <Image
-                src={Ricefield}
-                width={720}
-                height={1080}
-                alt=""
-                placeholder="blur"
-                className="w-64 rounded-md mb-2"
-              />
-
-              <p className="font-playfair text-pale-gold font-medium">
-                Oro Oro Ondo
-              </p>
-            </section>
+            />
           </section>
         </section>
 

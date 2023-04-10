@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import useLenis from '@/hooks/useLenis';
 
 const routes = {
-  Home: '/',
+  Home: '#',
   About: '#about',
   Projects: '#projects',
   Contact: '#footer',
@@ -80,14 +80,22 @@ export default function Menu() {
                 key={name}
                 className="menu-items cursor-pointer relative group hover:text-white transition-colors duration-100 ease-expo"
               >
-                <a
-                  href={route}
-                  onClick={(ev) => {
+                <p
+                  onClick={async (ev) => {
                     ev.preventDefault();
                     setShow(false);
 
                     if (route.startsWith('#')) {
-                      return lenis?.scrollTo(route, {
+                      if (router.pathname !== '/')
+                        return router.push(`/${route}`);
+
+                      let target: string | number = route;
+
+                      if (route === '#') {
+                        target = 0;
+                      }
+
+                      return lenis?.scrollTo(target, {
                         duration: 1,
                       });
                     }
@@ -97,7 +105,7 @@ export default function Menu() {
                   className="block pb-3 border-b text-4xl transition-all duration-300 ease-expo border-transparent group-hover:px-3 group-hover:border-pale-gold"
                 >
                   {name}
-                </a>
+                </p>
               </section>
             ))}
           </section>

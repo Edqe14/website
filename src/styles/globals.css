@@ -17,6 +17,10 @@ body {
   @apply bg-primary-dark text-zinc-100 selection:bg-white selection:text-zinc-800 overflow-x-hidden;
 }
 
+img {
+  @apply transition-all duration-200 ease-expo;
+}
+
 .mf-cursor:not(.-text):not(.-menu),
 .mf-cursor.-opaque {
   @apply mix-blend-exclusion;

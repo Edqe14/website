@@ -39,6 +39,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const lenisInstance = useLenis(({ instance }) => instance);
 
   useEffect(() => {
+    // ScrollTrigger.defaults({ markers: process.env.NODE_ENV === 'development' });
+
     const unsub = raf.add((time: number) => {
       gsap.updateRoot(time / 1000);
     }, 0);
@@ -106,8 +108,6 @@ export default function App({ Component, pageProps }: AppProps) {
       useCursor.setState({ instance: null });
     };
   }, []);
-
-  ScrollTrigger.defaults({ markers: process.env.NODE_ENV === 'development' });
 
   return (
     <section
