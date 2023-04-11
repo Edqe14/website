@@ -17,7 +17,7 @@ export default function Head({ title = 'Home' }: Props) {
       <meta name="description" content="A very epic site" />
       <meta name="og:site_name" content="Edqe_" />
       <meta name="og:description" content="A very epic site" />
-      <meta name="og:image" content="/favicon.ico" />
+      <meta name="og:image" content="/icon.png" />
       <meta name="theme-color" content="#1D191F" />
     </NextHead>
   );
