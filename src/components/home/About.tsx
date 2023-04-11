@@ -3,10 +3,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import createGlobe from 'cobe';
 import mapRange from '@/lib/mapRange';
+import Link from 'next/link';
+import useCursor from '@/hooks/useCursor';
 import PageMarker from '../PageMarker';
 import { Emoji } from '../Twemoji';
 
 export default function About() {
+  const cursor = useCursor(({ instance }) => instance);
   const targetRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLHeadingElement>(null);
   const roleRef = useRef<HTMLDivElement>(null);
@@ -58,7 +61,6 @@ export default function About() {
       })
       .to(fromRef.current, {
         id: 'from',
-        // y: 0,
         x: 0,
         ease: 'power2',
         scrollTrigger: {
@@ -130,7 +132,7 @@ export default function About() {
 
   return (
     <section
-      id="about"
+      data-id="about"
       className="relative p-12 w-screen min-h-[80vh] flex flex-col"
     >
       <section className="relative flex-grow flex flex-col items-center pt-36">
@@ -163,15 +165,24 @@ export default function About() {
                   className="text-3xl md:text-5xl xl:text-6xl font-medium tracking-tighter flex items-center leading-[0.8] pr-[2px]"
                   style={{ transform: 'translateX(100%)' }}
                 >
-                  <Emoji code="1f1ee-1f1e9" />
+                  <Emoji code="1f1ee-1f1e9" className="mr-5" />
                   FROM INDONESIA
                 </h2>
               </section>
             </section>
 
+            <Link
+              className="absolute bottom-48 font-medium opacity-40 hover:opacity-80 border-[2px] border-transparent hover:bg-zinc-600 hover:bg-opacity-30 hover:border-pale-gold transition-all duration-150 ease-in-out px-3 py-2 rounded-xl text-xl"
+              href="/about"
+              onMouseEnter={() => cursor?.addState('-pointer')}
+              onMouseLeave={() => cursor?.removeState('-pointer')}
+            >
+              Read more
+            </Link>
+
             <canvas
               ref={canvasRef}
-              className="w-[384px] h-[384px] scale-[1.3] md:scale-[1.8] aspect-square absolute bottom-28 lg:bottom-40 left-1/2 -translate-x-1/2 z-[-1] opacity-70"
+              className="w-[384px] h-[384px] scale-[1.4] md:scale-[1.8] aspect-square absolute bottom-32 lg:bottom-40 left-1/2 -translate-x-1/2 z-[-1] opacity-70"
               style={{
                 maskImage:
                   'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',

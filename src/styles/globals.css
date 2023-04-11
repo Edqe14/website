@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
   .custom-scrollbar {
     @apply scrollbar-thin scrollbar-track-light-gold scrollbar-thumb-pale-purple hover:scrollbar-thumb-light-purple overflow-x-hidden;
@@ -21,7 +20,7 @@ img {
   @apply transition-all duration-200 ease-expo;
 }
 
-.mf-cursor:not(.-text):not(.-menu),
+.mf-cursor:not(.-text):not(.-menu):not(.-media),
 .mf-cursor.-opaque {
   @apply mix-blend-exclusion;
 }

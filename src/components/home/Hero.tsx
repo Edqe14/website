@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import gsap from 'gsap';
 import PageMarker from '@/components/PageMarker';
-import { IconArrowDown } from '@tabler/icons';
+import { ArrowDown } from '@phosphor-icons/react';
 import { Emoji } from '../Twemoji';
 
 const Link = dynamic(() => import('next/link'), { ssr: false });
@@ -19,15 +19,14 @@ export default function Hero() {
     const greeting2All = gsap.utils.toArray('#hero-greeting2 *');
 
     const tl = gsap
-      .timeline()
-      .to(
-        greetingAll,
-        {
-          opacity: 1,
-          stagger: 0.2,
-        },
-        '1.5',
-      )
+      .timeline({
+        paused: true,
+        delay: 1,
+      })
+      .to(greetingAll, {
+        opacity: 1,
+        stagger: 0.2,
+      })
       .to(
         nameAll,
         {
@@ -45,6 +44,10 @@ export default function Hero() {
         '+=0.2',
       );
 
+    requestAnimationFrame(() => {
+      tl.play();
+    });
+
     return () => {
       tl.kill();
     };
@@ -59,7 +62,7 @@ export default function Hero() {
       <section className="flex-grow flex flex-col relative">
         <section className="flex flex-col sm:px-16 lg:px-48 xl:px-72 pt-24 md:pt-32 lg:pt-40 gap-4">
           <p
-            className="text-2xl font-medium flex flex-shrink-0 flex-grow-0 gap-2"
+            className="text-xl sm:text-2xl font-medium flex flex-shrink-0 flex-grow-0 gap-2"
             id="hero-greeting"
           >
             <span style={{ opacity: 0 }}>Hey</span>
@@ -68,7 +71,7 @@ export default function Hero() {
           </p>
 
           <h1
-            className="text-7xl md:text-8xl font-semibold ml-[-5px] text-light-gold flex flex-shrink-0 flex-grow-0 gap-4 tracking-tight"
+            className="text-6xl sm:text-7xl md:text-8xl font-semibold ml-[-5px] text-light-gold flex flex-shrink-0 flex-grow-0 gap-4 tracking-tight"
             id="hero-name"
           >
             <span style={{ opacity: 0 }}>I&apos;m</span>
@@ -92,7 +95,7 @@ export default function Hero() {
           </h1>
 
           <p
-            className="text-2xl font-medium flex flex-shrink-0 flex-grow-0 gap-2 text-zinc-100"
+            className="text-xl sm:text-2xl font-medium flex flex-shrink-0 flex-grow-0 gap-2 text-zinc-100"
             id="hero-greeting2"
           >
             <span style={{ opacity: 0 }}>Welcome</span>
@@ -121,8 +124,8 @@ export default function Hero() {
                 strokeDasharray="10.09 10.09"
               />
             </svg>
-            {/* <span className="w-72 absolute aspect-square border-[2px] border-light-purple border-opacity-60 rounded-full" /> */}
-            <IconArrowDown
+
+            <ArrowDown
               size={40}
               className="text-washed-purple"
               strokeWidth={2}

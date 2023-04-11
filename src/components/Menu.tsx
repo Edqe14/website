@@ -86,10 +86,22 @@ export default function Menu() {
                     setShow(false);
 
                     if (route.startsWith('#')) {
-                      if (router.pathname !== '/')
-                        return router.push(`/${route}`);
+                      if (router.pathname !== '/') {
+                        const query: Record<string, string> = {};
 
-                      let target: string | number = route;
+                        if (route !== '#') {
+                          query.scroll = route.slice(1);
+                        }
+
+                        return router.push({
+                          pathname: '/',
+                          query,
+                        });
+                      }
+
+                      let target: string | number = `[data-id=${route.slice(
+                        1,
+                      )}]`;
 
                       if (route === '#') {
                         target = 0;

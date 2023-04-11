@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import classNames from 'classnames';
 import { HTMLAttributes, ReactElement, ReactNode, useMemo } from 'react';
 import renderEmoji from 'react-easy-emoji';
 
@@ -10,6 +11,7 @@ interface Props extends HTMLAttributes<HTMLParagraphElement> {
 export function Emoji({
   code,
   emoji,
+  className,
   ...props
 }: { code: string; emoji?: string } & HTMLAttributes<HTMLImageElement>) {
   return (
@@ -17,7 +19,10 @@ export function Emoji({
       {...props}
       src={`https://twemoji.maxcdn.com/2/svg/${code}.svg`}
       alt={emoji}
-      className="h-[1em] inline-block my-0 mx-[.2em] align-[-0.1em]"
+      className={classNames(
+        'h-[1em] inline-block my-0 mx-[.2em] align-[-0.1em]',
+        className,
+      )}
     />
   );
 }
@@ -26,9 +31,9 @@ export default function Twemoji({ children, inline = false, ...props }: Props) {
   const rendered = useMemo(
     () =>
       renderEmoji(children, (code, emoji, key) => (
-        <Emoji code={code} emoji={emoji} key={key} />
+        <Emoji code={code} emoji={emoji} key={key} {...props} />
       )) as unknown as (ReactElement | string)[],
-    [children],
+    [children, props],
   );
 
   const map = rendered.map((value, i) =>
@@ -43,5 +48,9 @@ export default function Twemoji({ children, inline = false, ...props }: Props) {
 
   if (inline) return <>{map}</>;
 
-  return <p {...props}>{map}</p>;
+  return (
+    <p {...props} className={classNames('not-prose', props.className)}>
+      {map}
+    </p>
+  );
 }

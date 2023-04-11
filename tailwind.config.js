@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{js,ts,jsx,tsx}', './contents/**/*.{md,mdx}'],
   important: true,
   theme: {
     extend: {
@@ -21,11 +21,18 @@ module.exports = {
       },
       animation: {
         'spin-slow': 'spin 30s linear infinite',
+        hover: 'hovering 3s ease-in-out infinite',
+      },
+      keyframes: {
+        hovering: {
+          '0%, 100%': { transform: 'translateY(0) rotate(3deg)' },
+          '50%': { transform: 'translateY(-10px) rotate(4deg)' },
+        },
       },
       transitionTimingFunction: {
         expo: 'cubic-bezier(0.6, 0.01, 0, 0.95)',
       },
     },
   },
-  plugins: [require('tailwind-scrollbar')],
+  plugins: [require('tailwind-scrollbar'), require('@tailwindcss/typography')],
 };
