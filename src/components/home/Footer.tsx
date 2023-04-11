@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <footer
-      data-id="footer"
+      id="footer"
       className="p-12 w-screen h-[26rem] flex flex-col justify-between"
     >
       <section>

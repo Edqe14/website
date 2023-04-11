@@ -8,7 +8,7 @@ import useLenis from '@/hooks/useLenis';
 import { Project, allProjects } from 'contentlayer/generated';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 const BlurredBackground = () => {
   return (
@@ -37,7 +37,7 @@ export default function Home({ projects }: { projects: Project[] }) {
   const router = useRouter();
   const lenis = useLenis(({ instance }) => instance);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const scrollTo = () => {
       if (!router.query.scroll || !lenis) return;
 

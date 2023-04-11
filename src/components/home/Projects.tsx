@@ -11,7 +11,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
 
   return (
     <section
-      data-id="projects"
+      id="projects"
       className="relative p-12 w-screen min-h-screen flex flex-col"
     >
       <section className="relative flex-grow flex flex-col">

@@ -132,7 +132,7 @@ export default function About() {
 
   return (
     <section
-      data-id="about"
+      id="about"
       className="relative p-12 w-screen min-h-[80vh] flex flex-col"
     >
       <section className="relative flex-grow flex flex-col items-center pt-36">

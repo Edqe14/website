@@ -87,25 +87,22 @@ export default function Menu() {
 
                     if (route.startsWith('#')) {
                       if (router.pathname !== '/') {
-                        const query: Record<string, string> = {};
-
-                        if (route !== '#') {
-                          query.scroll = route.slice(1);
+                        if (route === '#') {
+                          return router.push('/');
                         }
 
-                        return router.push({
-                          pathname: '/',
-                          query,
-                        });
+                        return router.push(`/${route}`);
                       }
 
-                      let target: string | number = `[data-id=${route.slice(
-                        1,
-                      )}]`;
+                      let target: string | number = route;
 
                       if (route === '#') {
                         target = 0;
                       }
+
+                      router.push(router.pathname, router.pathname, {
+                        shallow: true,
+                      });
 
                       return lenis?.scrollTo(target, {
                         duration: 1,

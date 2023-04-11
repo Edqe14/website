@@ -31,6 +31,16 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
   };
 };
 
+const GoBack = () => (
+  <Link
+    href="/#projects"
+    className="flex items-center gap-3 mb-8 text-light-gold font-medium"
+  >
+    <ArrowLeft size={24} />
+    Go back • Projects
+  </Link>
+);
+
 const BlurredBackground = () => {
   return (
     <>
@@ -62,13 +72,7 @@ export default function Project({ project }: { project: Project }) {
 
       <section className="relative p-12 w-screen min-h-screen flex flex-col">
         <ContentLayout>
-          <Link
-            href={{ pathname: '/', query: { scroll: 'projects' } }}
-            className="flex items-center gap-3 mb-8 text-light-gold font-medium"
-          >
-            <ArrowLeft size={24} />
-            Go back • Projects
-          </Link>
+          <GoBack />
 
           <section className="mb-10 flex flex-col sm:flex-row items-start sm:items-end gap-3">
             <a
