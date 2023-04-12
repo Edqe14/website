@@ -130,7 +130,7 @@ const Body = ({ meta }: ReturnType<typeof getPaginatedPosts>) => {
             Prev
           </p>
 
-          <p className="font-medium">
+          <p className="text-sm sm:text-base font-medium whitespace-nowrap">
             Page {page} / {meta.total}
           </p>
 
