@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 @layer utilities {
-  .custom-scrollbar {
+  /* .custom-scrollbar {
     @apply scrollbar-thin scrollbar-track-light-gold scrollbar-thumb-pale-purple hover:scrollbar-thumb-light-purple overflow-x-hidden;
+  } */
+  .custom-scrollbar {
+    @apply scrollbar-none overflow-x-hidden;
   }
 }
 

@@ -6,6 +6,7 @@ import { Link } from '@phosphor-icons/react';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import { AnchorHTMLAttributes, DetailedHTMLProps, FC } from 'react';
 import classNames from 'classnames';
+import Image from 'next/image';
 import Twemoji from './Twemoji';
 
 type AnchorProps = DetailedHTMLProps<
@@ -49,6 +50,7 @@ const componentList = {
       className={classNames('rounded-none', className)}
     />
   ),
+  Image,
 };
 
 export default function ContentMDX({

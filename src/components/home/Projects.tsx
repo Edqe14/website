@@ -20,7 +20,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
         </li>
 
         <section className="grid lg:grid-cols-[2fr_1fr] gap-8 flex-shrink-0 flex-grow">
-          <section className="divide-y divide-pale-gold mb-4 sm:mb-0">
+          <section className="divide-y divide-pale-gold mb-4 sm:mb-0 -mx-5 sm:mx-0">
             {projects.map((project) => (
               <Link
                 className="block"
@@ -32,7 +32,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                 <article
                   onMouseEnter={() => cursor?.addState('-pointer')}
                   onMouseLeave={() => cursor?.removeState('-pointer')}
-                  className="group grid grid-cols-3 items-center relative px-4 sm:px-8 py-6 cursor-pointer after:z-[-1] after:absolute after:h-full after:inset-y-0 after:right-0 after:w-0 hover:after:left-0 after:bg-zinc-100 hover:after:w-full after:transition-all after:duration-200 after:ease-in-out"
+                  className="group grid grid-cols-3 items-center relative px-6 sm:px-8 py-6 cursor-pointer after:z-[-1] after:absolute after:h-full after:inset-y-0 after:right-0 after:w-0 hover:after:left-0 after:bg-zinc-100 hover:after:w-full after:transition-all after:duration-200 after:ease-in-out"
                 >
                   <section>
                     <h2 className="text-3xl font-medium group-hover:text-pale-purple tracking-tight">

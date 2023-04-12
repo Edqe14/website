@@ -1,8 +1,22 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
+import highlight from 'rehype-highlight';
+
+export const calculateReadingTime = (text) => {
+  // Step 2: Determine the average reading speed (words per minute)
+  const wordsPerMinute = 200;
+  // Step 3: Calculate the word count
+  const noOfWords = text.split(/\s/g).length;
+  // Step 4: Calculate the estimated reading time (in minutes)
+  const minutes = noOfWords / wordsPerMinute;
+  const readTime = Math.ceil(minutes);
+
+  // Step 5: Format the output
+  return `${minutes < 1 ? '<' : ''}${readTime} min read`;
+};
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  filePathPattern: 'posts/**/*.mdx',
+  filePathPattern: 'blog/**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: {
@@ -15,12 +29,21 @@ export const Post = defineDocumentType(() => ({
       description: 'The date of the post',
       required: true,
     },
+    image: {
+      type: 'string',
+      description: 'The image of the post',
+    },
   },
   computedFields: {
     url: {
       type: 'string',
       // eslint-disable-next-line no-underscore-dangle
-      resolve: (post) => `/posts/${post._raw.flattenedPath}`,
+      resolve: (post) => `/${post._raw.flattenedPath}`,
+    },
+    readingTime: {
+      type: 'string',
+      // eslint-disable-next-line no-underscore-dangle
+      resolve: (post) => calculateReadingTime(post.body.raw),
     },
   },
 }));
@@ -49,4 +72,7 @@ export const Project = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: './contents',
   documentTypes: [Post, Project],
+  mdx: {
+    rehypePlugins: [highlight],
+  },
 });

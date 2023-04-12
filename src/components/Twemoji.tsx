@@ -18,7 +18,7 @@ export function Emoji({
     <img
       {...props}
       src={`https://twemoji.maxcdn.com/2/svg/${code}.svg`}
-      alt={emoji}
+      alt={emoji ?? ''}
       className={classNames(
         'h-[1em] inline-block my-0 mx-[.2em] align-[-0.1em]',
         className,

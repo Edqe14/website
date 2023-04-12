@@ -25,14 +25,17 @@ export default function Footer() {
             weight="bold"
             className="text-light-gold text-2xl md:text-3xl flex-shrink-0"
           />
-          <a href="mailto:hello@edqe.me" className="text-3xl">
+          <a
+            href="mailto:hello@edqe.me"
+            className="text-3xl text-washed-purple"
+          >
             hello@edqe.me
           </a>
         </section>
       </section>
 
       <section className="flex justify-between gap-4 itmes-end">
-        <p className="text-pale-purple">
+        <p className="text-zinc-500 bg-blend-difference">
           &copy; {new Date().getFullYear()} Joshua T. All rights reserved.
         </p>
 

@@ -9,7 +9,7 @@ export default function ContentLayout({
   className?: string;
 }) {
   return (
-    <section className={classNames('lg:w-1/2 mx-auto', className)}>
+    <section className={classNames('w-full lg:w-2/5 mx-auto', className)}>
       {children}
     </section>
   );
