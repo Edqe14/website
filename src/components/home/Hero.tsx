@@ -60,7 +60,7 @@ export default function Hero() {
       </Link>
 
       <section className="flex-grow flex flex-col relative">
-        <section className="flex flex-col sm:px-16 lg:px-48 xl:px-72 pt-24 md:pt-32 lg:pt-40 gap-4">
+        <section className="flex flex-col sm:pl-[12vw] pt-[15vh] gap-4">
           <p
             className="text-xl sm:text-2xl font-medium flex flex-shrink-0 flex-grow-0 gap-2"
             id="hero-greeting"

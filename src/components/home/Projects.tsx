@@ -19,7 +19,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
           SELECTED WORKS
         </li>
 
-        <section className="grid lg:grid-cols-[2fr_1fr] gap-8 flex-shrink-0 flex-grow">
+        <section className="grid lg:grid-cols-[2fr_1fr] gap-8 flex-shrink-0 flex-grow mb-16">
           <section className="divide-y divide-pale-gold mb-4 sm:mb-0 -mx-5 sm:mx-0">
             {projects.map((project) => (
               <Link
@@ -57,7 +57,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
             ))}
           </section>
 
-          <section className="grid place-items-center">
+          <section className="grid place-items-center select-none">
             <a
               href="https://github.com/edqe14"
               target="_blank"

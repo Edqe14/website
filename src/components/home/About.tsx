@@ -133,7 +133,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative p-12 w-screen min-h-[80vh] flex flex-col"
+      className="relative p-12 w-screen min-h-[42rem] sm:min-h-[50rem] flex flex-col"
     >
       <section className="relative flex-grow flex flex-col items-center pt-36">
         <section id="about-scroll-container" className="w-full">
@@ -142,7 +142,7 @@ export default function About() {
               <section className="overflow-hidden ml-12 sm:ml-28">
                 <h2
                   ref={introRef}
-                  className="text-3xl md:text-4xl xl:text-5xl font-medium tracking-tighter leading-[0.8]"
+                  className="text-[24px] md:text-4xl xl:text-5xl font-medium tracking-tighter leading-[0.8]"
                   style={{ transform: 'translateY(100%)' }}
                 >
                   I&apos;M A
@@ -153,7 +153,7 @@ export default function About() {
                 <h2
                   style={{ transform: 'translateY(100%)' }}
                   ref={roleRef}
-                  className="whitespace-nowrap text-[42px] md:text-8xl xl:text-[7.5rem] font-semibold tracking-tighter leading-[0.8]"
+                  className="whitespace-nowrap text-[40px] sm:text-7xl md:text-8xl xl:text-[7.5rem] font-semibold tracking-tighter leading-[0.8]"
                 >
                   WEB DEVELOPER
                 </h2>
@@ -162,7 +162,7 @@ export default function About() {
               <section className="overflow-hidden self-end">
                 <h2
                   ref={fromRef}
-                  className="text-3xl md:text-5xl xl:text-6xl font-medium tracking-tighter flex items-center leading-[0.8] pr-[2px]"
+                  className="text-[24px] md:text-5xl xl:text-6xl font-medium tracking-tighter flex items-center leading-[0.8] pr-[2px]"
                   style={{ transform: 'translateX(100%)' }}
                 >
                   <Emoji code="1f1ee-1f1e9" className="mr-5" />
@@ -172,7 +172,7 @@ export default function About() {
             </section>
 
             <Link
-              className="absolute bottom-48 font-medium opacity-40 hover:opacity-80 border-[2px] border-transparent hover:bg-zinc-600 hover:bg-opacity-30 hover:border-pale-gold transition-all duration-150 ease-in-out px-3 py-2 rounded-xl text-xl"
+              className="absolute bottom-48 font-medium opacity-40 hover:opacity-80 border-[2px] border-transparent hover:bg-zinc-600 hover:bg-opacity-30 hover:border-pale-gold transition-all duration-150 ease-in-out px-3 py-2 rounded-xl text-lg sm:text-xl"
               href="/about"
               onMouseEnter={() => cursor?.addState('-pointer')}
               onMouseLeave={() => cursor?.removeState('-pointer')}

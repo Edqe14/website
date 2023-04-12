@@ -65,7 +65,7 @@ export default function Menu() {
 
       <section
         ref={ref}
-        className="fixed inset-0 ml-auto sm:max-w-2xl px-16 sm:px-24 pb-16 pt-36 bg-primary-dark z-20"
+        className="fixed inset-0 ml-auto sm:max-w-2xl px-16 sm:px-24 pb-16 pt-[16vh] bg-primary-dark z-20"
         style={{
           transform: 'translateX(100%)',
         }}

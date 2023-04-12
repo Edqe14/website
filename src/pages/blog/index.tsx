@@ -51,24 +51,18 @@ const Body = ({ meta }: ReturnType<typeof getPaginatedPosts>) => {
         <Logo />
       </Link>
 
-      <ContentLayout>
-        <h2 className="font-semibold text-4xl sm:text-5xl lg:text-6xl tracking-tight flex gap-4 items-center mb-8">
+      <ContentLayout className="flex flex-col flex-grow">
+        <h2 className="font-semibold text-4xl sm:text-5xl tracking-tight flex gap-4 items-center mb-8">
           <Link href="/">
             <ArrowLeft
-              className="hidden sm:block text-light-gold text-2xl md:text-3xl flex-shrink-0"
-              weight="bold"
-              size={38}
-            />
-
-            <ArrowLeft
-              className="block sm:hidden text-light-gold text-2xl md:text-3xl flex-shrink-0"
+              className="text-light-gold text-2xl md:text-3xl flex-shrink-0"
               size={32}
             />
           </Link>
           Blog
         </h2>
 
-        <section className="-mx-5 sm:mx-0 mb-8">
+        <section className="-mx-5 sm:mx-0 mb-8 flex-grow">
           {data?.data.map((post) => (
             <Link
               className="block"

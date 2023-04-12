@@ -80,7 +80,11 @@ export default function Project({ post }: { post: Post }) {
 
           <section className="mb-12">
             {post.image && (
-              <img className="mb-8 rounded-md" src={post.image} alt="Banner" />
+              <img
+                className="mb-8 rounded-md mx-auto aspect-[20/9] object-cover"
+                src={post.image}
+                alt="Banner"
+              />
             )}
 
             <h2 className="font-semibold text-5xl lg:text-6xl tracking-tight block">
