@@ -27,7 +27,7 @@ export default function Footer() {
           />
           <a
             href="mailto:hello@edqe.me"
-            className="text-3xl text-washed-purple"
+            className="text-2xl sm:text-3xl text-washed-purple"
           >
             hello@edqe.me
           </a>
@@ -35,7 +35,7 @@ export default function Footer() {
       </section>
 
       <section className="flex justify-between gap-4 itmes-end">
-        <p className="text-zinc-500 bg-blend-difference">
+        <p className="text-sm sm:text-base text-zinc-500 bg-blend-difference">
           &copy; {new Date().getFullYear()} Joshua T. All rights reserved.
         </p>
 
