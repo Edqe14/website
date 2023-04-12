@@ -8,8 +8,9 @@ import parsePage from '@/lib/parsePage';
 import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { format, parseISO } from 'date-fns';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import useSWR, { SWRConfig } from 'swr';
 
@@ -39,8 +40,11 @@ const BlurredBackground = () => {
 };
 
 const Body = ({ meta }: ReturnType<typeof getPaginatedPosts>) => {
+  const router = useRouter();
   const cursor = useCursor(({ instance }) => instance);
-  const [page, setPage] = useState(meta.page);
+  const [page, setPage] = useState(
+    router.query.page ? parsePage(router.query.page, 1) : meta.page,
+  );
   const { data } = useSWR<ReturnType<typeof getPaginatedPosts>>(
     `/api/blog/list?page=${page}&limit=${GLOBAL_LIMIT}`,
   );
@@ -177,10 +181,8 @@ export default function Blog({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const page = parsePage(query.page, 1);
-
-  const posts = getPaginatedPosts(page, GLOBAL_LIMIT);
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = getPaginatedPosts(1, GLOBAL_LIMIT);
 
   return {
     props: {
