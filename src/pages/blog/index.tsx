@@ -52,12 +52,17 @@ const Body = ({ meta }: ReturnType<typeof getPaginatedPosts>) => {
       </Link>
 
       <ContentLayout>
-        <h2 className="font-semibold text-5xl lg:text-6xl tracking-tight flex gap-4 items-center mb-8">
+        <h2 className="font-semibold text-4xl sm:text-5xl lg:text-6xl tracking-tight flex gap-4 items-center mb-8">
           <Link href="/">
             <ArrowLeft
+              className="hidden sm:block text-light-gold text-2xl md:text-3xl flex-shrink-0"
               weight="bold"
-              className="text-light-gold text-2xl md:text-3xl flex-shrink-0"
               size={38}
+            />
+
+            <ArrowLeft
+              className="block sm:hidden text-light-gold text-2xl md:text-3xl flex-shrink-0"
+              size={32}
             />
           </Link>
           Blog
