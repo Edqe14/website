@@ -29,11 +29,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                 // eslint-disable-next-line no-underscore-dangle
                 href={`/${project._raw.flattenedPath}`}
               >
-                <article
-                  onMouseEnter={() => cursor?.addState('-pointer')}
-                  onMouseLeave={() => cursor?.removeState('-pointer')}
-                  className="group grid grid-cols-3 items-center relative px-6 sm:px-8 py-6 cursor-pointer after:z-[-1] after:absolute after:h-full after:inset-y-0 after:right-0 after:w-0 hover:after:left-0 after:bg-zinc-100 hover:after:w-full after:transition-all after:duration-200 after:ease-in-out"
-                >
+                <article className="group grid grid-cols-3 items-center relative px-6 sm:px-8 py-6 cursor-pointer after:z-[-1] after:absolute after:h-full after:inset-y-0 after:right-0 after:w-0 hover:after:left-0 after:bg-zinc-100 hover:after:w-full after:transition-all after:duration-200 after:ease-in-out">
                   <section>
                     <h2 className="text-3xl font-medium group-hover:text-pale-purple tracking-tight">
                       {project.name}
