@@ -3,12 +3,9 @@ import Link from 'next/link';
 import { ArrowRight } from '@phosphor-icons/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import useCursor from '@/hooks/useCursor';
 import PageMarker from '../PageMarker';
 
 export default function Projects({ projects }: { projects: Project[] }) {
-  const cursor = useCursor(({ instance }) => instance);
-
   return (
     <section
       id="projects"
