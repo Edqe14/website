@@ -75,7 +75,7 @@ export default function Project({ post }: { post: Post }) {
           <Logo />
         </Link>
 
-        <ContentLayout>
+        <ContentLayout tight>
           <GoBack />
 
           <section className="mb-12">
@@ -87,7 +87,7 @@ export default function Project({ post }: { post: Post }) {
               />
             )}
 
-            <h2 className="font-semibold text-5xl lg:text-6xl tracking-tight block">
+            <h2 className="font-semibold text-5xl lg:text-6xl tracking-tight leading-tight lg:leading-tight block mb-4">
               {post.title}
             </h2>
 

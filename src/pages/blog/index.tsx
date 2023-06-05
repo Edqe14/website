@@ -87,19 +87,19 @@ const Body = ({ meta }: ReturnType<typeof getPaginatedPosts>) => {
                 onClick={() => {
                   cursor?.removeText();
                 }}
-                className="group grid grid-cols-2 md:grid-cols-3 items-center relative px-6 sm:px-8 py-6 cursor-pointer after:z-[-1] after:absolute after:h-full after:inset-y-0 after:right-0 after:w-0 hover:after:left-0 after:bg-zinc-100 hover:after:w-full after:transition-all after:duration-200 after:ease-in-out"
+                className="group grid grid-cols-[4fr_1fr] md:grid-cols-[3fr_1fr_2fr] items-center relative px-6 sm:px-8 py-6 cursor-pointer after:z-[-1] after:absolute after:h-full after:inset-y-0 after:right-0 after:w-0 hover:after:left-0 after:bg-zinc-100 hover:after:w-full after:transition-all after:duration-200 after:ease-in-out"
               >
-                <section>
+                <section className="mr-8">
                   <h2 className="text-3xl font-medium group-hover:text-pale-purple tracking-tight">
                     {post.title}
                   </h2>
 
-                  <p className="text-light-gold block lg:hidden justify-self-center md:justify-self-start font-medium text-lg mt-1">
+                  <p className="text-light-gold block lg:hidden justify-self-center md:justify-self-start whitespace-nowrap font-medium text-lg mt-1">
                     {format(parseISO(post.date), 'LLLL d, yyyy')}
                   </p>
                 </section>
 
-                <p className="text-light-gold hidden md:block opacity-0 lg:opacity-100 justify-self-center xl:justify-self-start font-medium text-xl tracking-tight">
+                <p className="text-light-gold hidden md:block opacity-0 lg:opacity-100 justify-self-center xl:justify-self-start whitespace-nowrap font-medium text-xl tracking-tight">
                   {format(parseISO(post.date), 'LLLL d, yyyy')}
                 </p>
 
