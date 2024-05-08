@@ -1,6 +1,7 @@
 import ContentLayout from '@/components/ContentLayout';
 import ContentMDX from '@/components/ContentMDX';
 import Head from '@/components/Head';
+import Logo from '@/components/Logo';
 import { ArrowLeft } from '@phosphor-icons/react';
 import { allProjects } from 'contentlayer/generated';
 import type { Project } from 'contentlayer/generated';
@@ -71,6 +72,10 @@ export default function Project({ project }: { project: Project }) {
       <BlurredBackground />
 
       <section className="relative p-12 w-screen min-h-screen flex flex-col">
+        <Link className="absolute hidden lg:block" href="/">
+          <Logo />
+        </Link>
+
         <ContentLayout>
           <GoBack />
 

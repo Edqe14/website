@@ -17,6 +17,8 @@ import useStore from '@/hooks/useStore';
 import useCursor from '@/hooks/useCursor';
 import dynamic from 'next/dynamic';
 import { isMobile } from 'react-device-detect';
+import posthog from 'posthog-js';
+import { PostHogProvider } from 'posthog-js/react';
 
 const Menu = dynamic(() => import('@/components/Menu'), { ssr: false });
 
@@ -33,6 +35,17 @@ const playfair = Playfair({
 MouseFollower.registerGSAP(gsap);
 gsap.registerPlugin(ScrollTrigger);
 gsap.ticker.remove(gsap.updateRoot);
+
+if (typeof window !== 'undefined') {
+  // checks that we are client-side
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    api_host:
+      process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+    loaded: (hog) => {
+      if (process.env.NODE_ENV === 'development') hog.debug(); // debug mode in development
+    },
+  });
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   const { showMenu, setShowMenu, lockScroll } = useStore();
@@ -110,22 +123,24 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <section
-      className={cn(
-        inter.variable,
-        playfair.variable,
-        'font-inter relative overflow-hidden',
-      )}
-    >
-      <Menu />
+    <PostHogProvider client={posthog}>
+      <section
+        className={cn(
+          inter.variable,
+          playfair.variable,
+          'font-inter relative overflow-hidden',
+        )}
+      >
+        <Menu />
 
-      <Burger
-        opened={showMenu}
-        onClick={setShowMenu}
-        className="fixed right-12 top-12"
-      />
+        <Burger
+          opened={showMenu}
+          onClick={setShowMenu}
+          className="fixed right-12 top-12"
+        />
 
-      <Component {...pageProps} />
-    </section>
+        <Component {...pageProps} />
+      </section>
+    </PostHogProvider>
   );
 }
