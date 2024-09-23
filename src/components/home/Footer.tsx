@@ -49,7 +49,7 @@ export default function Footer() {
             onMouseEnter={() => cursor?.setText('Copy')}
             onMouseLeave={() => cursor?.removeText()}
             onClick={async () => {
-              await navigator.clipboard.writeText('Yuka#2686');
+              await navigator.clipboard.writeText('edqe14');
 
               cursor?.setText('Copied!');
 
