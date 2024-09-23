@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import Logo from '@/components/Logo';
-import useCursor from '@/hooks/useCursor';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import gsap from 'gsap';
@@ -11,8 +10,6 @@ import { Emoji } from '../Twemoji';
 const Link = dynamic(() => import('next/link'), { ssr: false });
 
 export default function Hero() {
-  const cursor = useCursor(({ instance }) => instance);
-
   useEffect(() => {
     const greetingAll = gsap.utils.toArray('#hero-greeting *');
     const nameAll = gsap.utils.toArray('#hero-name *');
@@ -89,11 +86,13 @@ export default function Hero() {
               //   audio.play();
               // }}
             >
-              <span className='text-lg tracking-tighter opacity-80 absolute -bottom-6 right-1'><span className='opacity-75'>a.k.a</span> Edqe14</span>
-
+              <span className="text-lg tracking-tighter opacity-80 absolute -bottom-6 right-1">
+                <span className="opacity-75">a.k.a</span> Edqe14
+              </span>
               Yuka
             </span>
-            <span style={{ opacity: 0 }}>.</span><br />
+            <span style={{ opacity: 0 }}>.</span>
+            <br />
           </h1>
 
           <p
